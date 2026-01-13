@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import os
 
 # -------------------------------------------------
 # Page Configuration
@@ -19,9 +20,12 @@ st.caption(
 # -------------------------------------------------
 # Load Model Artifacts
 # -------------------------------------------------
-MODEL_PATH = "models/logistic_regression_final.pkl"
-SCALER_PATH = "models/scaler.pkl"
-FEATURES_PATH = "models/feature_names.pkl"
+BASE_DIR = os.path.dirname(__file__)
+
+# Model paths
+MODEL_PATH = os.path.join(BASE_DIR, "models", "logistic_regression_final.pkl")
+SCALER_PATH = os.path.join(BASE_DIR, "models", "scaler.pkl")
+FEATURES_PATH = os.path.join(BASE_DIR, "models", "feature_names.pkl")
 
 
 model = joblib.load(MODEL_PATH)
@@ -159,9 +163,6 @@ explain_df = pd.DataFrame({
 
 st.dataframe(explain_df, use_container_width=True)
 
-# -------------------------------------------------
-# Retention Action Recommendation
-# -------------------------------------------------
 # -------------------------------------------------
 # Retention Action Recommendation (Dynamic)
 # -------------------------------------------------
